@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Hello</title>
+</head>
+<body>
+    <div >
+        <h1>text</h1>
+        <p th:text="${userName}">king</p>
+        <span th:text="'Welcome to our application, ' + ${userName} + '!'"></span>
+        <br/>
+        <span th:text="|Welcome to our application, ${userName}!|"></span>
+    </div>
+
+    <div >
+        <h1>If/Unless</h1>
+        <a th:if="${flag == 'yes'}"  th:href="@{http://favorites.ren/}"> home </a>
+        <br/>
+        <a th:unless="${flag eq 'no'}" th:href="@{http://www.ityouknow.com/}" >ityouknow</a>
+    </div>
+
+    <div>
+        <h1>for循环</h1>
+        <table>
+            <tr th:each="user,iterStat : ${users}">
+                <td th:text="${user.name}">king</td>
+                <td th:text="${user.pass}">king</td>
+                <td th:text="${user.age}">king</td>
+                <td th:text="${iterStat.index}">index</td>
+            </tr>
+        </table>
+    </div>
+
+    <div >
+        <h1>URL</h1>
+        <a  th:href="@{http://www.ityouknow.com/{type}(type=${type})}">link1</a>
+        <a  href="http://www.ityouknow.com/">link2</a>
+        <br/>
+        <a th:href="@{http://www.ityouknow.com/{pageId}/can-use-springcloud.html(pageId=${pageId})}">view</a>
+        <br/>
+        <div th:style="'background:url(' + @{${img}} + ');height:300px'">
+            <br/><br/><br/>
+        </div>
+    </div>
+
+    <div >
+        <h1>EQ</h1>
+        <input th:value="${userName}"/>
+        <br/>
+        <input th:value="${age gt 30 ? '中年':'年轻'}"/>
+        <br/>
+        <a th:if="${flag eq 'yes'}"  th:href="@{http://favorites.ren/}"> favorites </a>
+    </div>
+
+    <div >
+        <h1>switch</h1>
+        <div th:switch="${sex}">
+            <p th:case="'woman'">她是一个姑娘...</p>
+            <p th:case="'man'">这是一个爷们!</p>
+            <!-- *: case的默认的选项 -->
+            <p th:case="*">未知性别的一个家伙。</p>
+        </div>
+    </div>
+</body>
+</html>
